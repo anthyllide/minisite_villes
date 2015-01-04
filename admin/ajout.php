@@ -13,8 +13,9 @@ if (isset ($_POST['valider']))
 //protections des variables
 $ville_nom = strip_tags($_POST['ville_nom']);
 $ville_texte = strip_tags($_POST['ville_texte']);
+$pays_id = strip_tags($_POST['pays_id']);
 
-	if ((empty ($ville_nom)) OR (empty ($ville_texte)))
+	if ((empty ($ville_nom)) OR (empty ($ville_texte)) OR (empty($pays_id)))
 	{
 	echo 'Vous devez saisir le nom d\'une ville et son texte de description.';
 	}
@@ -30,10 +31,11 @@ $ville_texte = strip_tags($_POST['ville_texte']);
 		else 
 		{
 		
-		$result = $bdd -> prepare ('INSERT INTO villes (villes_nom, ville_texte) VALUES (:ville_nom,:ville_texte)') OR die (print_r($bdd->errorInfo()));
+		$result = $bdd -> prepare ('INSERT INTO villes (villes_nom, ville_texte, pays_id) VALUES (:ville_nom,:ville_texte, :pays_id)') OR die (print_r($bdd->errorInfo()));
 		$result -> execute (array(
 								'ville_nom'=> $ville_nom,
-								'ville_texte'=>$ville_texte
+								'ville_texte'=>$ville_texte,
+								'pays_id' => $pays_id
 								));
 	if ($result == true)
 		{
@@ -46,6 +48,17 @@ $ville_texte = strip_tags($_POST['ville_texte']);
 	}
 	}
 }
+
+// requête table pays
+
+$rep = $bdd -> query ('SELECT pays_id, pays_nom FROM pays');
+
+while ($row = $rep -> fetch())
+{
+$pays_liste[$row['pays_id']]=$row['pays_nom'];
+}
+$rep -> closeCursor();
+
 ?>
 <div id="wrapper">
 
@@ -58,7 +71,23 @@ $ville_texte = strip_tags($_POST['ville_texte']);
 <p>Entrez le texte de présentation :<br />
 <textarea name="ville_texte" id="ville_texte" cols="30" rows="10"></textarea></p>
 <p><input type="submit" name="valider" value="Valider"/></p>
+
+<div id="choix_pays">
+<?php
+
+foreach ($pays_liste as $pays_id => $pays_nom)
+{
+	
+	?>
+	<p><input type="radio" name="pays_id" value="<?php echo $pays_id;?>"/><?php echo $pays_nom; ?></p>
+	
+	<?php
+	
+}
+?>
+</div>
 </form>
+
 </section>
 <menu>
 <?php require_once ('inc_menu_admin.php'); ?>

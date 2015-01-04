@@ -30,6 +30,13 @@ color : black;
 margin : 0 0 10px -12px;
 }
 
+#titre_nom_pays{
+font-family : Arial;
+font-size : 20px;
+color : black;
+margin-left : 10px;
+}
+
 section {
 width : 480px;
 margin : 20px 0 0 200px;
@@ -63,6 +70,21 @@ font-size : 13px;
 text-decoration : underline;
 }
 
-menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover {
+menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover,  #valider:hover {
 color : orange;
 }
+
+#choix_pays {
+position : absolute;
+right : 400px;
+top : 80px;
+}
+
+#choix_pays p {
+margin-bottom : 10px;
+}
+
+form p {
+margin-bottom : 10px;
+}
+
