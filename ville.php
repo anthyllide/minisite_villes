@@ -5,7 +5,7 @@ if (isset ($_GET['key']))
 {
 $id = strip_tags($_GET['key']); //protection contre les injections XSS
 
-$result = $bdd -> prepare('SELECT id,villes_nom, ville_texte FROM villes WHERE id=?') or die (print_r($bdd -> errorInfo()));
+$result = $bdd -> prepare('SELECT id,villes_nom, ville_texte, pays_id FROM villes WHERE id=?') or die (print_r($bdd -> errorInfo()));
 $result -> execute (array($id));
 $row = $result -> fetch ();
 
@@ -16,6 +16,14 @@ $identifiant = $row['id'];
 
 	$nom = $row['villes_nom'];
 	$texte = $row['ville_texte'];
+	$pays_id = $row['pays_id'];
+	
+	//requête dans la table pays pour afficher le pays
+	$rep = $bdd -> prepare ('SELECT pays_nom FROM pays WHERE pays_id=?');
+	$rep -> execute (array($pays_id));
+	$row= $rep -> fetch();
+	
+	$pays_nom = $row['pays_nom'];
 	
 	}
 	else 
@@ -41,7 +49,7 @@ else
 <body>
 <div id="wrapper">
 <div id="titre_site">
-<h1><?php echo $nom; ?></h1>
+<h1><?php echo $nom; ?><span id="titre_nom_pays">(<?php echo $pays_nom; ?>)</span></h1>
 </div>
 <section>
 <p><?php echo $texte; ?></p>
