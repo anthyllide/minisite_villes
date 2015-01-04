@@ -1,0 +1,68 @@
+*{
+margin :0;
+padding : 0;
+}
+
+#wrapper {
+width : 990px;
+margin : 0 auto;
+}
+
+#titre_site{
+font-family : Arial;
+font-size : 20px;
+color : blue;
+margin: 10px 0 0 200px;
+}
+
+#titre_admin{
+font-family : Arial;
+font-size : 10px;
+color : orange;
+margin: 10px 0 0 200px;
+}
+
+#titre_liste {
+font-family : Arial;
+font-size : 10px;
+font-weight : bold;
+color : black;
+margin : 0 0 10px -12px;
+}
+
+section {
+width : 480px;
+margin : 20px 0 0 200px;
+font-family : Arial;
+font-size : 15px;
+}
+
+menu {
+position : absolute;
+top : 50px;
+right : 150px;
+}
+
+
+#acces_admin{
+margin: 250px 0 0 815px;
+}
+
+#inc_liste{
+margin : 20px 0 0 215px;
+}
+
+li {
+list-style-type : disc;
+}
+
+menu ul li a, #acces_admin ul li a, #menu_liste ul li a  {
+color : blue;
+font-family : Arial;
+font-size : 13px;
+text-decoration : underline;
+}
+
+menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover {
+color : orange;
+}
