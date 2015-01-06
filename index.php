@@ -23,7 +23,7 @@
 </menu>
 <div id="acces_admin">
 <ul>
-<li><a href="admin/admin.php">Administration</a></li>
+<li><a href="login.php">Administration</a></li>
 </ul>
 </div>
 </div>

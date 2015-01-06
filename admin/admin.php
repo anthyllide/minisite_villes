@@ -1,4 +1,5 @@
 <?php require_once ('../include/inc_connexion.php'); ?>
+<?php require ('../include/inc_identification_user.php');?>
 <! DOCTYPE html>
 <html lang="fr">
 <head>
