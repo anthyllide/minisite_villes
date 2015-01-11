@@ -38,7 +38,7 @@ margin-left : 10px;
 }
 
 section {
-width : 480px;
+width : 450px;
 margin : 20px 0 0 200px;
 font-family : Arial;
 font-size : 15px;
@@ -51,26 +51,26 @@ right : 150px;
 }
 
 
-#acces_admin{
-margin: 250px 0 0 815px;
-}
-
 #inc_liste{
 margin : 20px 0 0 215px;
 }
 
-li {
-list-style-type : disc;
+
+menu ul li a, #acces_admin ul li a {
+color : #ea5a30;
+font-family : helvetica;
+font-size : 15px;
+text-decoration : none;
 }
 
-menu ul li a, #acces_admin ul li a, #menu_liste ul li a  {
+#menu_liste ul li a {
 color : blue;
 font-family : Arial;
-font-size : 13px;
+font-size : 15px;
 text-decoration : underline;
 }
 
-menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover,  #valider:hover {
+menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover,  #valider:hover , #connexion a:hover {
 color : orange;
 }
 
@@ -87,4 +87,36 @@ margin-bottom : 10px;
 form p {
 margin-bottom : 10px;
 }
+
+#connexion{
+font-family : Arial;
+font-size : 12px;
+color : blue;
+background-color : #edeeea;
+text-align : center;
+min-width : 80px;
+max-width: 180px;
+padding : 3px;
+position : absolute;
+top : -40px;
+right : 10px;
+margin-bottom : 200px;
+border : solid black 1px;
+border-radius : 10px;
+}
+
+#menu_site , #menu_admin{
+margin-top : 40px;
+}
+
+#menu_site li , #menu_admin li {
+list-style-type : none;
+border : solid grey 1px;
+width : 180px;
+height : 23px;
+text-align : center;
+padding-top : 5px;
+background-color : #eaeeee;
+}
+
 

@@ -1,5 +1,7 @@
 <?php
+session_start(); 
 require_once ('include/inc_connexion.php');
+require_once ('include/inc_stat.php'); 
 
 if (isset ($_GET['key']))
 {

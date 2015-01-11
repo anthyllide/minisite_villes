@@ -1,4 +1,6 @@
 <?php require_once ('include/inc_connexion.php'); ?>
+<?php require_once ('include/inc_stat.php'); ?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,10 +23,7 @@
 <menu>
 <?php require_once ('include/inc_menu.php'); ?>
 </menu>
-<div id="acces_admin">
-<ul>
-<li><a href="login.php">Administration</a></li>
-</ul>
+
 </div>
 </div>
 </body>
