@@ -119,4 +119,43 @@ padding-top : 5px;
 background-color : #eaeeee;
 }
 
+#table_stat table{
+margin-top : 30px;
+border-collapse : collapse;
+font-family : Arial;
+font-size : 15px;
+}
 
+#table_stat table tr td, #table_stat table tr th {
+border : solid black 1px;
+text-align : center;
+padding : 2px;
+}
+
+#table_stat table tr th {
+background-color : #edeeea;
+font-weight : bold;
+}
+
+#search_form{
+margin-top : 30px;
+}
+
+#search_form input#search {
+width : 300px;
+height : 28px;
+color : grey;
+border : solid black 1px;
+}
+
+#search_form input#search_submit {
+background-image : url(../images/loupe_search.jpg);
+height : 30px;
+width : 30px;
+border: none;
+margin-left : -31px;
+}
+
+#search_form input#search_submit:hover {
+cursor : pointer;
+}

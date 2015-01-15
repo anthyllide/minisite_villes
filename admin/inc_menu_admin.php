@@ -16,8 +16,9 @@ $message = 'Bonjour '.$_SESSION['user_login'];
 <ul>
 <li><a href="admin.php">Accueil administration</a></li>
 <li><a href="ajout.php">Ajouter une ville</a></li>
+<li><a href="ajout_pays.php">Ajouter un pays</a></li>
 <li><a href="pays.php">Voir les pays</a></li>
-<li><a href="../stat.php">Voir les stats</a></li>
+<li><a href="stat.php">Voir les stats</a></li>
 <li><a href="../index.php">Voir le site</a></li>
 </ul>
 </div>

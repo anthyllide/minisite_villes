@@ -13,14 +13,14 @@ $row = $result -> fetch ();
 
 $identifiant = $row['id'];
 
-	if(isset ($identifiant))//vérifie que l'id est bien dans la table
+	if(isset ($identifiant))//vÃ©rifie que l'id est bien dans la table
 	{
 
 	$nom = $row['villes_nom'];
 	$texte = $row['ville_texte'];
 	$pays_id = $row['pays_id'];
 	
-	//requête dans la table pays pour afficher le pays
+	//requÃªte dans la table pays pour afficher le pays
 	$rep = $bdd -> prepare ('SELECT pays_nom FROM pays WHERE pays_id=?');
 	$rep -> execute (array($pays_id));
 	$row= $rep -> fetch();
@@ -30,13 +30,13 @@ $identifiant = $row['id'];
 	}
 	else 
 	{
-	?><p><a href="index.php"><?php echo 'Retour à la page d\'accueil';?></a></p><?php
+	?><p><a href="index.php"><?php echo 'Retour Ã  la page d\'accueil';?></a></p><?php
 	exit;
 	}
 }
 else
 {
-?><p><a href="index.php"><?php echo 'Retour à la page d\'accueil';?></a></p><?php
+?><p><a href="index.php"><?php echo 'Retour Ã  la page d\'accueil';?></a></p><?php
 	exit;
 }
 ?>

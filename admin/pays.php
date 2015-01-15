@@ -12,8 +12,24 @@
 <div id="wrapper">
 
 <?php
+if(isset ($_GET['suppr']))
+{
+$pays_id = $_GET['suppr'];
 
-if (isset ($_GET['key']))
+$reponse = $bdd -> prepare('DELETE FROM pays WHERE pays_id=?');
+$reponse -> execute (array($pays_id));
+
+	if ($reponse == true)
+	{
+	echo 'Le pays a bien été supprimé.';
+	}
+	else
+	{
+	echo 'La suppression a échouée.';
+	}
+}
+
+elseif (isset ($_GET['key']))
 {
 $pays_id = $_GET['key'];
 
@@ -62,7 +78,7 @@ $pays_id = $row ['pays_id'];
 <ul>
 <li><a href="pays.php?key=<?php echo $pays_id; ?>"><?php
 echo $pays_nom;
-?></a>
+?></a>&nbsp;<a href="pays.php?suppr=<?php echo $pays_id; ?>">[supprimer]</a>
 </li>
 </ul>
 <?php

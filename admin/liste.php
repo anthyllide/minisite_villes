@@ -33,6 +33,8 @@ foreach ($villes as $key => $value)
 }
 ?>
 </ul>
+
+</div>
 </div>
 </body>
 </html>
