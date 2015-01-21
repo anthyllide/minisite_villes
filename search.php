@@ -2,22 +2,28 @@
 session_start(); 
 require_once ('include/inc_connexion.php');
 
-if (isset ($_POST['search_submit']))
-{
-$search_ville = strip_tags($_POST['search']);
+//vérification si le $_POST existe
 
+if (isset ($_POST['search_submit'])) 
+{
+$search_ville = strip_tags($_POST['search']);//protection contre les injections XSS
+
+	// test de la variable $_POST
+	
 	if (empty ($search_ville))
 	{
 	$message_error = 'Veuillez entrer le nom d\'une ville SVP.';
 	}
 	else
 	{
-		//  Utilisateurs connectés 
+		//  Cas des utilisateurs connectés (on utilise le $_SESSION pour les identifier)
+		
 		if (isset($_SESSION['user_login']))
 		{
 		$userLogin = $_SESSION['user_login'];
 		
-		//recuperation du user_id de l'utilisateur dans la table user
+		//recuperation du user_id de l'utulisateur dans la table user
+		
 		$rep2 = $bdd -> prepare ('SELECT user_id FROM user WHERE user_login=?');
 		$rep2 -> execute (array($userLogin));
 		$row2 = $rep2 -> fetch();
@@ -26,160 +32,31 @@ $search_ville = strip_tags($_POST['search']);
 			
 		$rep2 -> closeCursor();
 		
-		// requete recherche de la ville ds tables villes
-		$rep = $bdd -> prepare ('SELECT id, villes_nom FROM villes WHERE villes_nom LIKE ?') or die (print_r($bdd->errorInfo()));
-		$rep -> execute (array('%'.$search_ville.'%'));
+		require ('include/inc_search.php');
 		
-		$nb_rows = $rep -> rowCount(); //méthode qui compte le nb de lignes 
-		
-			if ($nb_rows > 0)
-			{
-				while ($row = $rep -> fetch())
-				{
-				$search_result [$row['id']] = $row ['villes_nom'];
-				
-				}
-			
-			$rep -> closeCursor();
-			
-			// boucle foreach pour récuper les ville_id
-			
-			foreach ($search_result as $key => $value)
-			{
-			$resultID = $key;
-			
-			$regist = $bdd -> prepare ('INSERT INTO user_search (userID, resultID) VALUES (:userID, :resultID)');
-			$regist -> execute (array(
-									'userID' => $userID,
-									'resultID' => $resultID
-									));
-			}
-			
-			$regist -> closeCursor();
-			
-			}
-			
-			//affichage de l'historique de recherche
-			$history = $bdd -> prepare ('
-			SELECT v.villes_nom ville, s.resultID resultID
-			FROM villes v
-			INNER JOIN user_search s
-			ON s.resultID = v.id
-			WHERE s.userID = ?
-			GROUP BY ville
-			ORDER BY ville
-			') or die(print_r($bdd->errorInfo()));
-			
-			$history -> execute (array($userID));
-			
-				while ($history_row = $history -> fetch())
-				{
-				$result_history [$history_row['resultID']] = $history_row['ville'];
-				}
-			
-			$history -> closeCursor();	
 		}
 		else
 		{
+		
+			// cas des utilisateur non connectés (création d'un cookie valable 3 mois)
 			if (!isset ($_COOKIE['userID']))
 			{
 			$userID = uniqid();
 		
 			setcookie('userID', $userID, time()+ 7776000);
 			
-		// requete recherche de la ville ds tables villes
-		$rep = $bdd -> prepare ('SELECT id, villes_nom FROM villes WHERE villes_nom LIKE ?') or die (print_r($bdd->errorInfo()));
-		$rep -> execute (array('%'.$search_ville.'%'));
+			require ('include/inc_search.php');
 		
-		$nb_rows = $rep -> rowCount(); //méthode qui compte le nb de lignes 
-		
-				if ($nb_rows > 0)
-				{
-					while ($row = $rep -> fetch())
-					{
-					$search_result [$row['id']] = $row ['villes_nom'];
-				
-					}
-			
-				$rep -> closeCursor();
-				
-				// boucle foreach pour récuper les ville_id
-			
-			foreach ($search_result as $key => $value)
-			{
-			$resultID = $key;
-			
-			$regist = $bdd -> prepare ('INSERT INTO user_search (userID, resultID) VALUES (:userID, :resultID)');
-			$regist -> execute (array(
-									'userID' => $userID,
-									'resultID' => $resultID
-									));
-			}
-			
-			$regist -> closeCursor();
-			
-				}
 			}
 			else
 			{
 			
 			$userID = $_COOKIE ['userID'];
 			
+			require ('include/inc_search.php');
 			
-			// requete recherche de la ville ds tables villes
-		$rep = $bdd -> prepare ('SELECT id, villes_nom FROM villes WHERE villes_nom LIKE ?') or die (print_r($bdd->errorInfo()));
-		$rep -> execute (array('%'.$search_ville.'%'));
+			}
 		
-		$nb_rows = $rep -> rowCount(); //méthode qui compte le nb de lignes 
-		
-			if ($nb_rows > 0)
-			{
-				while ($row = $rep -> fetch())
-				{
-				$search_result [$row['id']] = $row ['villes_nom'];
-				
-				}
-			
-			$rep -> closeCursor();
-			
-			// boucle foreach pour récuper les ville_id
-			
-			foreach ($search_result as $key => $value)
-			{
-			$resultID = $key;
-			
-			$regist = $bdd -> prepare ('INSERT INTO user_search (userID, resultID) VALUES (:userID, :resultID)');
-			$regist -> execute (array(
-									'userID' => $userID,
-									'resultID' => $resultID
-									));
-			}
-			
-			$regist -> closeCursor();
-			
-			}
-			}
-			
-			//affichage de l'historique de recherche
-			$history = $bdd -> prepare ('
-			SELECT v.villes_nom ville, s.resultID resultID
-			FROM villes v
-			INNER JOIN user_search s
-			ON s.resultID = v.id
-			WHERE s.userID = ?
-			GROUP BY ville
-			ORDER BY ville
-			') or die(print_r($bdd->errorInfo()));
-			
-			$history -> execute (array($userID));
-			
-				while ($history_row = $history -> fetch())
-				{
-				$result_history [$history_row['resultID']] = $history_row['ville'];
-				}
-			
-			$history -> closeCursor();	
-			
 		} 
 		
 	}
@@ -194,7 +71,9 @@ $search_ville = strip_tags($_POST['search']);
 <title>Page recherche</title>
 <link rel="stylesheet" href="css/style.css" media="screen" />
 </head>
+
 <body>
+
 <div id="wrapper">
 
 <div id="titre_site">
@@ -212,7 +91,8 @@ else
 {
 ?>
 <h3 id="result">Ville(s) correspondante(s) à votre recherche :</h3>
-	<ul class="list_search">
+
+<ul class="list_search">
 <?php
 if (isset($search_result))
 {
@@ -223,7 +103,7 @@ if (isset($search_result))
 	<?php
 	}
 	?>
-	</ul>
+</ul>
 <?php
 }
 else
@@ -233,7 +113,9 @@ else
 <?php
 }
 ?>
+
 <h4 id="last_searches">Vos dernières recherches :</h4>
+
 <ul class="list_search">
 <?php 
 if (isset($result_history))
@@ -258,7 +140,7 @@ else
 ?>
 
 
-<menu>
+<menu id="menu">
 <?php require_once ('include/inc_menu.php'); ?>
 </menu>
 

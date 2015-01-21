@@ -1,6 +1,6 @@
 *{
-margin :0;
-padding : 0;
+margin :0px;
+padding : 0px;
 }
 
 #wrapper {
@@ -56,7 +56,7 @@ margin : 20px 0 0 215px;
 }
 
 
-menu ul li a, #acces_admin ul li a {
+menu ul li a, #menu ul li a, #acces_admin ul li a {
 color : #ea5a30;
 font-family : helvetica;
 font-size : 15px;
@@ -150,11 +150,12 @@ padding-left : 5px;
 }
 
 #search_form input#search_submit {
+position : relative;
 background-image : url(../images/loupe_search.jpg);
 height : 30px;
 width : 30px;
 border: none;
-margin-left : -31px;
+left : -31px;
 }
 
 #search_form input#search_submit:hover {
