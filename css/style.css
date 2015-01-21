@@ -70,7 +70,7 @@ font-size : 15px;
 text-decoration : underline;
 }
 
-menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover,  #valider:hover , #connexion a:hover {
+menu ul li a:hover, #acces_admin ul li a:hover, #menu_liste ul li a:hover,  #valider:hover , #connexion a:hover, .list_search li a:hover {
 color : orange;
 }
 
@@ -146,6 +146,7 @@ width : 300px;
 height : 28px;
 color : grey;
 border : solid black 1px;
+padding-left : 5px;
 }
 
 #search_form input#search_submit {
@@ -158,4 +159,38 @@ margin-left : -31px;
 
 #search_form input#search_submit:hover {
 cursor : pointer;
+border : solid grey 1px;
+}
+
+.error {
+font-family : Arial;
+font-size : 15px;
+color : red;
+font-weight : bold;
+}
+
+#result {
+margin: 20px 0 10px 0;
+font-family : Arial;
+font-size : 20px;
+}
+
+#last_searches {
+margin: 40px 0 10px 0;
+font-family : Arial;
+font-size : 17px;
+}
+
+.list_search li{ 
+margin: 0 0 10px 20px;
+list-style-type : hiragana;
+color : #7950ca;
+}
+
+.list_search li a {
+color : #7950ca;
+font-size : helvetica;
+font-weight : bold;
+font-size : 16px;
+text-decoration : underline; 
 }
