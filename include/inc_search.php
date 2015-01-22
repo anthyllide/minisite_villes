@@ -1,5 +1,5 @@
 <?php
-		// requete recherche de la ville ds tables villes
+		// requête recherche de la ville ds tables villes
 		
 		$rep = $bdd -> prepare ('SELECT id, villes_nom FROM villes WHERE villes_nom LIKE ?') or die (print_r($bdd->errorInfo()));
 		

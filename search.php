@@ -92,10 +92,12 @@ else
 ?>
 <h3 id="result">Ville(s) correspondante(s) à votre recherche :</h3>
 
-<ul class="list_search">
 <?php
 if (isset($search_result))
 {
+?>
+<ul class="list_search">
+<?php
 	foreach ($search_result as $key => $value)
 	{
 	?>
@@ -116,10 +118,12 @@ else
 
 <h4 id="last_searches">Vos dernières recherches :</h4>
 
-<ul class="list_search">
 <?php 
 if (isset($result_history))
 {
+?>
+<ul class="list_search">
+<?php
 	foreach ($result_history as $key => $value)
 	{
 	?>
@@ -140,7 +144,7 @@ else
 ?>
 
 
-<menu id="menu">
+<menu>
 <?php require_once ('include/inc_menu.php'); ?>
 </menu>
 

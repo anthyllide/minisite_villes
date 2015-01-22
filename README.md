@@ -3,6 +3,8 @@
 
 Création d'un mini site sur les villes avec PHP et Mysql.
 
+
+
 But du devoir
 =============
 
@@ -43,9 +45,31 @@ de recherche UNIQUEMENT pour l'internaute en train de consulter le site.
 Dans le cas du mini site des villes, il existe deux types d'utilisateurs : ceux connectés en tant qu'administrateur et les
 autres.
 
+Pour les utilisateurs connectés, j'utilise la session pour identifier l'internaute et ensuite enregistrer les recherches dans la table user_search.
+
+Pour les utilisateurs non connectés, je créé un cookie, nommé userID, dans lequel il est enregistré un identifiant généré par
+la fonction uniqid(). Ce cookie est valable 3 mois (je trouve que c'est déjà assez long!).
+
+Ensuite, on registre les recherches dans la table user_search et pour l'historique on se sert du cookie.
 
 
+Points à améliorer
+==================
 
+
+Quand l'internaute effectue une recherche pour la première fois, l'historique affiche tout de suite les résultats de cette
+première recherche. J'aurai préférer que l'historique ne s'affiche qu'à partir de sa deuxième visite. Pour cela, il aurait 
+peut-être fallu créer un cookies "nb_visit", mais cela aurait encore alourdi le code.
+
+
+La table user_search enregistre tous les résultats de recherche associés à un utilisateur. Le nombre d'entrée devient
+rapidement très élevé. J'avais pensé à n"enregistrer que les couples userID/recherches une seule fois en faisant 
+un "select", puis une comparaison entre les variables UserID et result_search. Cela aurait permit de ne pas utiliser
+un GROUP BY lors de la requête d'affichage de l'historique. 
+Néanmoins, si le site compte plusieurs milliers de visiteurs uniques par jour, la table user_search serait rapidement très longue.
+
+Peut-être on aurait pu effacer automatiquement les entrées les plus anciennes. Mais je ne 
+vois pas comment faire cela...
 
 
 

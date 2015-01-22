@@ -25,7 +25,7 @@
 
 <div id="search_form">
 <form action="search.php" method="post">
-<p><input type="text" value="rechercher une ville..." name="search" id="search" /><input type="submit" name="search_submit" id="search_submit" value=""/></p>
+<p><input type="text" placeholder="rechercher une ville..." name="search" id="search"/><input type="submit" name="search_submit" id="search_submit" value=""/></p>
 </form>
 </div>
 

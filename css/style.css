@@ -139,9 +139,11 @@ font-weight : bold;
 
 #search_form{
 margin-top : 30px;
+position : relative;
 }
 
 #search_form input#search {
+position : absolute;
 width : 300px;
 height : 28px;
 color : grey;
@@ -150,12 +152,12 @@ padding-left : 5px;
 }
 
 #search_form input#search_submit {
-position : relative;
+position : absolute;
 background-image : url(../images/loupe_search.jpg);
 height : 30px;
 width : 30px;
 border: none;
-left : -31px;
+left : 277px;
 }
 
 #search_form input#search_submit:hover {
